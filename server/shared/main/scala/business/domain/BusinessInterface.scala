@@ -29,7 +29,7 @@ trait CustomerMgmtService {
 trait CustomerValidator {
 
   def validate(customer: Customer) : List[BusinessException] = {
-    var errors = List[BusinessException]() 
+    var errors = List[BusinessException]()
 
     customer match {
 

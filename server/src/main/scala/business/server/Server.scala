@@ -1,7 +1,4 @@
 import business.domain._
-import business.server.CustomerValidator
-import upickle._
-import spray.routing.SimpleRoutingApp
 
 
 object CustomerMgmtServiceImpl extends CustomerMgmtService with CustomerValidator {
@@ -33,11 +30,11 @@ object CustomerMgmtServiceImpl extends CustomerMgmtService with CustomerValidato
 }
 
 
-object AutowireServer extends autowire.Server[Customer, upickle.Reader[Customer], upickle.Writer[Customer]] {
-  def read[Result: upickle.Reader](p: Customer) = upickle.read[Result](p)
-
-  def write[Result: upickle.Writer](r: Result) = upickle.write(r)
-}
+//object AutowireServer extends autowire.Server[Customer, upickle.Reader[Customer], upickle.Writer[Customer]] {
+//  def read[Result: upickle.Reader](p: Customer) = upickle.read[Result](p)
+//
+//  def write[Result: upickle.Writer](r: Result) = upickle.write(r)
+//}
 
 
 //object Server extends SimpleRoutingApp with CustomerMgmtService {
