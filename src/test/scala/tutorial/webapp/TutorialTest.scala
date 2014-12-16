@@ -7,7 +7,7 @@ import org.scalajs.jquery.jQuery
 object TutorialTest extends TestSuite {
 
   // Initialize App
-  TutorialApp.setupUI()
+  TutorialAppJQuery.setupUI()
 
   def tests = TestSuite {
     'HelloWorld {

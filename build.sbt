@@ -6,6 +6,8 @@ scalaVersion := "2.11.2"
 
 libraryDependencies += "org.scala-lang.modules.scalajs" %%% "scalajs-jquery" % "0.6"
 
+libraryDependencies += "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6"
+
 ScalaJSKeys.jsDependencies += scala.scalajs.sbtplugin.RuntimeDOM
 
 skip in ScalaJSKeys.packageJSDependencies := false

@@ -4,7 +4,7 @@ import scala.scalajs.js.JSApp
 
 import org.scalajs.jquery.jQuery
 
-object TutorialApp extends JSApp {
+object TutorialAppJQuery extends JSApp {
   def main(): Unit = {
     jQuery(setupUI _)
   }
