@@ -2,6 +2,9 @@
 target/
 
 # eclipse project files
+.idea
 /.settings
 /.classpath
 /.project
+.boot
+.ivy
