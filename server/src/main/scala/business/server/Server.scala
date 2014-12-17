@@ -1,4 +1,5 @@
 import business.domain._
+import upickle.{Reader, Writer}
 
 
 object CustomerMgmtServiceImpl extends CustomerMgmtService with CustomerValidator {
@@ -30,11 +31,17 @@ object CustomerMgmtServiceImpl extends CustomerMgmtService with CustomerValidato
 }
 
 
-//object AutowireServer extends autowire.Server[Customer, upickle.Reader[Customer], upickle.Writer[Customer]] {
-//  def read[Result: upickle.Reader](p: Customer) = upickle.read[Result](p)
+object AutowireServer extends autowire.Server[String, upickle.Reader[_], upickle.Writer[_]] {
+  def read[Result: upickle.Reader](p: String) = upickle.read[Result](p)
+
+  def write[Result: upickle.Writer](r: Result) = upickle.write(r)
+
+  val routes = AutowireServer.route[CustomerMgmtService](CustomerMgmtServiceImpl)
+
+//  override def read[Result](p: String)(implicit evidence$3: Reader[_])
 //
-//  def write[Result: upickle.Writer](r: Result) = upickle.write(r)
-//}
+//  override def write[Result](r: Result)(implicit evidence$4: Writer[_])
+}
 
 
 //object Server extends SimpleRoutingApp with CustomerMgmtService {
