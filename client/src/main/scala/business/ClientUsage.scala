@@ -1,19 +1,24 @@
 package business
 
 // Business shared
+
 import business.domain._
 
 // Scala concurrency
+
 import scala.concurrent.Future
 
 // Autowire macro enabling
+
 import autowire._
 
 // UI specific
+
 import scalatags.JsDom.all._
 import org.scalajs.dom
 
 // Scala.js specific
+
 import scala.scalajs.js.annotation.JSExport
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.runNow
 
@@ -25,31 +30,41 @@ object ClientUsage {
   @JSExport
   def main(): Unit = {
 
-    val inputBox = input.render
+    val customer: Customer = Customer(100, "Joe", "Smith", List(EmailAddress("joe", "smith.com")))
+
+    // Variable declared just to show that AutoWire wraps in a Future the return value of the calls
+    val call: Future[Either[Customer, List[BusinessException]]] = Client[CustomerMgmtService].
+      registerCustomer(customer).call()
+
+    //val inputBox = input.render
     val outputBox = div.render
-    //List(EmailAddress("joe", "smith.com"))
-    def updateOutput() = {
 
-      val call: Future[Either[Customer, List[BusinessException]]] = Client[CustomerMgmtService].
-        registerCustomer(Customer(100, "Joe", "Smith", Nil)).call()
+    /**
+     *
+     */
+    def updateOutput(call1: Future[Either[Customer, List[BusinessException]]]) = {
 
-      call.foreach { customerOrErrors =>
+      call1.foreach { customerOrErrors =>
 
         outputBox.innerHTML = ""
         outputBox.appendChild(
           ul(
-            for (e <- customerOrErrors.right.get) yield {
-              li(BusinessMessages.messageFor(e.errorCode))
+            if (customerOrErrors.isRight) {
+              for (e <- customerOrErrors.right.get) yield {
+                li(BusinessMessages.messageFor(e.errorCode))
+              }
+            } else {
+              li("Registration worked and new id is " + customerOrErrors.left.get.id)
             }
           ).render
         )
       }
     }
-    inputBox.onkeyup = { (e: dom.Event) =>
-      updateOutput()
-    }
+//    inputBox.onkeyup = { (e: dom.Event) =>
+//      updateOutput()
+//    }
 
-    updateOutput()
+    updateOutput(call)
     dom.document.body.appendChild(
       div(
         cls := "container",
