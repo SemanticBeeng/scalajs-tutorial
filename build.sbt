@@ -1,9 +1,9 @@
-import sbt.Keys._
-import scala.scalajs.sbtplugin.ScalaJSPlugin._
-import ScalaJSKeys._
 import com.lihaoyi.workbench.Plugin._
-import spray.revolver.AppProcess
+import sbt.Keys._
 import spray.revolver.RevolverPlugin.Revolver
+
+import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
+import scala.scalajs.sbtplugin.ScalaJSPlugin._
 
 
 scalaJSSettings
@@ -35,28 +35,33 @@ val cross = new utest.jsrunner.JsCrossBuild(
     "com.lihaoyi" %%% "autowire" % "0.2.3"
   )
 )
+
 val client = cross.js.in(file("client"))
-  .copy(id="client")
-  .settings(scalaJSSettings ++workbenchSettings:_*)
+  .copy(id = "client")
+  .settings(scalaJSSettings ++ workbenchSettings: _*)
   .settings(
     name := "Client",
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6"
+      "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6",
+      "com.scalatags" %%% "scalatags" % "0.4.2"
     ),
-    bootSnippet := "Client().main();"
+    bootSnippet := "ClientUsage().main();"
   )
 
 val server = cross.jvm.in(file("server"))
-  .copy(id="server")
-  .settings(Revolver.settings:_*)
+  .copy(id = "server")
+  .settings(Revolver.settings: _*)
   .settings(
     name := "Server",
     libraryDependencies ++= Seq(
       "io.spray" %% "spray-can" % "1.3.1",
-      "io.spray" %% "spray-routing" % "1.3.1"
+      "io.spray" %% "spray-routing" % "1.3.1",
+      "com.typesafe.akka" %% "akka-actor" % "2.3.2",
+      "com.scalatags" %%% "scalatags" % "0.4.2" //added this separately for server to highlight this dependency is weird
     ),
+    // SBT magic incantations
     (resources in Compile) += {
-      (fastOptJS in (client, Compile)).value
-      (artifactPath in (client, Compile, fastOptJS)).value
+      (fastOptJS in(client, Compile)).value
+      (artifactPath in(client, Compile, fastOptJS)).value
     }
   )

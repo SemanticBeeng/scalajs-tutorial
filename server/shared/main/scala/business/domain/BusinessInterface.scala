@@ -33,7 +33,8 @@ trait CustomerValidator {
 
     customer match {
 
-      case Customer(id, _*) if id != 0 => errors = errors :+ BusinessException(BusinessMessages.CUSTOMER_ALREADY_EXISTS)
+      case Customer(id, _, _, _) if id != 0 => errors = errors :+ BusinessException(BusinessMessages
+        .CUSTOMER_ALREADY_EXISTS)
 
       case Customer(_, _, _, List()) => errors = errors :+ BusinessException(BusinessMessages.NO_CONTACT_INFO)
 
