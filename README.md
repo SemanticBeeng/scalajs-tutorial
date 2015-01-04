@@ -5,3 +5,4 @@ This repository contains the code accompanying the [Scala.js tutorial](http://ww
 ### Run with
 
 * $ sbt ~re-start
+* http://localhost:8080/
