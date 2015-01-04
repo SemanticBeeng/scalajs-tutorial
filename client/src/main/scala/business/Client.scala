@@ -4,6 +4,8 @@ import org.scalajs.dom
 import upickle._
 
 import scala.concurrent.Future
+
+// Needed here as well
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.runNow
 
 /**

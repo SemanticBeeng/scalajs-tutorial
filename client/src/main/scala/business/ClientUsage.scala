@@ -1,13 +1,21 @@
 package business
 
-import autowire._
+// Business shared
 import business.domain._
+
+// Scala concurrency
+import scala.concurrent.Future
+
+// Autowire macro enabling
+import autowire._
+
+// UI specific
+import scalatags.JsDom.all._
 import org.scalajs.dom
 
-import scala.concurrent.Future
-import scala.scalajs.concurrent.JSExecutionContext.Implicits.runNow
+// Scala.js specific
 import scala.scalajs.js.annotation.JSExport
-import scalatags.JsDom.all._
+import scala.scalajs.concurrent.JSExecutionContext.Implicits.runNow
 
 /**
  *
