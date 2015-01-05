@@ -14,8 +14,16 @@ import scala.scalajs.js.annotation.{JSExport, JSExportAll}
 @JSExport("EmailAddress")
 case class EmailAddress(@(JSExport @field) name: String, @(JSExport @field) domain: String)
 
+/**
+ *
+ *  new EmailAddress2("Nick", "Wolf")
+ *  causes
+ *  Uncaught ReferenceError: EmailAddress2 is not defined
+ *
+ *  while this works
+ *  new EmailAddress("Nick", "Wolf")
+ */
 // @JSExportAll requires @JSExport?
-@JSExport("EmailAddress2")
 @JSExportAll
 case class EmailAddress2(name: String, domain: String)
 
