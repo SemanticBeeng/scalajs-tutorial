@@ -1,9 +1,14 @@
 package business.domain
+// must be here
+import scala.scalajs.js.annotation.JSExport
 
+@JSExport("domain.EmailAddress")
 case class EmailAddress(name: String, domain: String)
 
+@JSExport("domain.Customer")
 case class Customer(id: Long, firstName: String, lastName: String, emails: List[EmailAddress])
 
+@JSExport("domain.BusinessException")
 case class BusinessException(errorCode: Int)
 
 /**
@@ -44,3 +49,5 @@ trait CustomerValidator {
   }
 
 }
+@JSExport("domain.CustomerValidator")
+object CustomerValidator extends CustomerValidator

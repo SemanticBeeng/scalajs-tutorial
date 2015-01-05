@@ -30,11 +30,12 @@ object ClientUsage {
   @JSExport
   def main(): Unit = {
 
-    val customer: Customer = Customer(100, "Joe", "Smith", List(EmailAddress("joe", "smith.com")))
+    val customer1: Customer = Customer(100, "Joe", "Smith", List())
+    ///val customer2: Customer = Customer(0, "Joe", "Smith", List(EmailAddress("joe", "smith.com")))
 
     // Variable declared just to show that AutoWire wraps in a Future the return value of the calls
-    val call: Future[Either[Customer, List[BusinessException]]] = Client[CustomerMgmtService].
-      registerCustomer(customer).call()
+    val call1: Future[Either[Customer, List[BusinessException]]] = Client[CustomerMgmtService].
+      registerCustomer(customer1).call()
 
     //val inputBox = input.render
     val outputBox = div.render
@@ -64,7 +65,7 @@ object ClientUsage {
 //      updateOutput()
 //    }
 
-    updateOutput(call)
+    updateOutput(call1)
     dom.document.body.appendChild(
       div(
         cls := "container",
