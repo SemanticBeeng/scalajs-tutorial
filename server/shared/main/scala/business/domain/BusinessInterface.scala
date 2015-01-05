@@ -9,15 +9,19 @@ package business.domain
  */
 
 import scala.annotation.meta.field
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.{JSExport, JSExportAll}
 
-@JSExport
+@JSExport("EmailAddress")
 case class EmailAddress(@(JSExport @field) name: String,  @(JSExport @field) domain: String)
 
-@JSExport("Customer")
+@JSExport("EmailAddress2")
+@JSExportAll
+case class EmailAddress2(name: String,  domain: String)
+
+@JSExportAll
 case class Customer(id: Long, firstName: String, lastName: String, emails: List[EmailAddress])
 
-@JSExport("BusinessException")
+@JSExportAll
 case class BusinessException(errorCode: Int)
 
 /**
@@ -58,6 +62,6 @@ trait CustomerValidator {
   }
 
 }
-@JSExport("CustomerValidator")
+@JSExport
 object CustomerValidator extends CustomerValidator
 
