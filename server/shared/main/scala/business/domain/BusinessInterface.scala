@@ -12,11 +12,12 @@ import scala.annotation.meta.field
 import scala.scalajs.js.annotation.{JSExport, JSExportAll}
 
 @JSExport("EmailAddress")
-case class EmailAddress(@(JSExport @field) name: String,  @(JSExport @field) domain: String)
+case class EmailAddress(@(JSExport @field) name: String, @(JSExport @field) domain: String)
 
+// @JSExportAll requires @JSExport?
 @JSExport("EmailAddress2")
 @JSExportAll
-case class EmailAddress2(name: String,  domain: String)
+case class EmailAddress2(name: String, domain: String)
 
 @JSExportAll
 case class Customer(id: Long, firstName: String, lastName: String, emails: List[EmailAddress])
@@ -29,7 +30,7 @@ case class BusinessException(errorCode: Int)
  */
 object BusinessMessages {
 
-  final val CUSTOMER_ALREADY_EXISTS:Int = 1001
+  final val CUSTOMER_ALREADY_EXISTS: Int = 1001
   final val NO_CONTACT_INFO = 1002
 
   def messageFor(errorCode: Int) = errorCode match {
@@ -46,7 +47,7 @@ trait CustomerMgmtService {
 
 trait CustomerValidator {
 
-  def validate(customer: Customer) : List[BusinessException] = {
+  def validate(customer: Customer): List[BusinessException] = {
     var errors = List[BusinessException]()
 
     customer match {
@@ -62,6 +63,7 @@ trait CustomerValidator {
   }
 
 }
+
 @JSExport
 object CustomerValidator extends CustomerValidator
 
