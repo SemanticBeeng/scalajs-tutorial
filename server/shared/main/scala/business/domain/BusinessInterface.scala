@@ -1,14 +1,23 @@
 package business.domain
-// must be here
+
+/**
+ * See more about exporting and interoperability here
+ * http://www.scala-js.org/doc/export-to-javascript.html
+ * http://www.scala-js.org/doc/js-interoperability.html
+ * https://groups.google.com/forum/#!topic/scala-js/knNTjVcss8E
+ *
+ */
+
+import scala.annotation.meta.field
 import scala.scalajs.js.annotation.JSExport
 
-@JSExport("domain.EmailAddress")
-case class EmailAddress(name: String, domain: String)
+@JSExport
+case class EmailAddress(@(JSExport @field) name: String,  @(JSExport @field) domain: String)
 
-@JSExport("domain.Customer")
+@JSExport("Customer")
 case class Customer(id: Long, firstName: String, lastName: String, emails: List[EmailAddress])
 
-@JSExport("domain.BusinessException")
+@JSExport("BusinessException")
 case class BusinessException(errorCode: Int)
 
 /**
@@ -49,5 +58,6 @@ trait CustomerValidator {
   }
 
 }
-@JSExport("domain.CustomerValidator")
+@JSExport("CustomerValidator")
 object CustomerValidator extends CustomerValidator
+

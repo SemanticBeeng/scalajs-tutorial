@@ -1,7 +1,8 @@
 package scala.scalajs.js.annotation
 
 /**
- * see https://groups.google.com/forum/#!topic/scala-js/knNTjVcss8E for rationale for copying this class here
+ * For rationale for copying this class see
+ * https://groups.google.com/forum/#!topic/scala-js/knNTjVcss8E
  */
 /** Specifies that the given entity should be exported for use in raw JS.
   *
