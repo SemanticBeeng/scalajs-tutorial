@@ -24,12 +24,15 @@ case class EmailAddress(@(JSExport @field) name: String, @(JSExport @field) doma
  *  new EmailAddress("Nick", "Wolf")
  */
 // @JSExportAll requires @JSExport?
+@JSExport
 @JSExportAll
 case class EmailAddress2(name: String, domain: String)
 
+@JSExport
 @JSExportAll
 case class Customer(id: Long, firstName: String, lastName: String, emails: List[EmailAddress])
 
+@JSExport
 @JSExportAll
 case class BusinessException(errorCode: Int)
 
