@@ -12,16 +12,16 @@ import scala.annotation.meta.field
 import scala.scalajs.js.annotation.{JSExport, JSExportAll}
 
 @JSExport("EmailAddress")
-case class EmailAddress(@(JSExport @field) name: String, @(JSExport @field) domain: String)
+case class EmailAddress(@(JSExport@field) name: String, @(JSExport@field) domain: String)
 
 /**
  *
- *  new EmailAddress2("Nick", "Wolf")
- *  causes
- *  Uncaught ReferenceError: EmailAddress2 is not defined
+ * new EmailAddress2("Nick", "Wolf")
+ * causes
+ * Uncaught ReferenceError: EmailAddress2 is not defined
  *
- *  while this works
- *  new EmailAddress("Nick", "Wolf")
+ * while this works
+ * new EmailAddress("Nick", "Wolf")
  */
 // @JSExportAll requires @JSExport?
 @JSExport
@@ -59,14 +59,14 @@ trait CustomerMgmtService {
 trait CustomerValidator {
 
   def validate(customer: Customer): List[BusinessException] = {
-    var errors = List[BusinessException]()
+    var errors: List[BusinessException] = List()
 
     customer match {
 
-      case Customer(id, _, _, _) if id != 0 => errors = errors :+ BusinessException(BusinessMessages
+      case c@Customer(id, _, _, _) if id != 0 => errors = errors :+ BusinessException(BusinessMessages
         .CUSTOMER_ALREADY_EXISTS)
 
-      case Customer(_, _, _, List()) => errors = errors :+ BusinessException(BusinessMessages.NO_CONTACT_INFO)
+      case c@Customer(_, _, _, List()) => errors = errors :+ BusinessException(BusinessMessages.NO_CONTACT_INFO)
 
       //case _ => Left(internalPersist(customer))
     }
