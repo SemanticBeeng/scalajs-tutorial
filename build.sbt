@@ -25,7 +25,7 @@ lazy val root = PlayScalaJS("jvm", "js", file("."), CrossType.Full).
     testFrameworks += new TestFramework("utest.runner.Framework")
   ).
   jvmSettings(
-    name := "server",
+    //name := "server",
 
     libraryDependencies ++= Seq(
       "io.spray" %% "spray-can" % "1.3.1",
@@ -38,7 +38,7 @@ lazy val root = PlayScalaJS("jvm", "js", file("."), CrossType.Full).
 
   ).
   jsSettings(
-    name := "client",
+    //name := "client",
 
     persistLauncher := true,
 
@@ -51,9 +51,9 @@ lazy val root = PlayScalaJS("jvm", "js", file("."), CrossType.Full).
   )
 
 // Only if you use IntelliJ: the shared project makes IntelliJ happy without using symlinks
-lazy val shared = Project("shared", file("shared"))
+//lazy val shared = Project("shared", file("shared"))
 lazy val jvm = root.jvm
 lazy val js = root.js
 
-jvm.dependsOn(shared)
-js.dependsOn(shared)
+//jvm.dependsOn(sharedProject)
+//js.dependsOn(sharedProject)
